@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="col">
+    <button class="btn btn-secondary" (click)="redirectListagem()">Voltar</button>
+  </div>
+  <br/>
+  <h2>{{titulo}}</h2>
+  <form #pessoaCadastroForm="ngForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label>Nome:</label>
+      <input type="text" class="form-control" name="nome" placeholder="Nome" [(ngModel)]="pessoa.nome">
+    </div>
+    <br/>
+    <div class="form-group">
+      <label>CPF:</label>
+      <input type="text" class="form-control" name="cpf" placeholder="CPF" [(ngModel)]="pessoa.cpf">
+    </div>
+    <br/>
+    <div class="form-group">
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input type="date" class="form-control" name="dataNascimento" [(ngModel)]="pessoa.dataNascimento">
+    </div>
+    <br/>
+    <hr>
+    <h3>Contatos</h3>
+    <div class="form-group" *ngFor="let contato of pessoa.contatos; let i = index" style="margin-bottom: 15px">
+      <label>Nome:</label>
+      <input type="text" class="form-control" id="nomeContatoId{{i}}" name="nomeContato{{i}}" placeholder="Nome" [(ngModel)]="pessoa.contatos[i].nome">
+      <label>Email:</label>
+      <input type="email" class="form-control" id="emailId{{i}}" name="email{{i}}" placeholder="Email" [(ngModel)]="pessoa.contatos[i].email">
+      <label>Telefone:</label>
+      <input type="text" class="form-control" id="telefoneId{{i}}" name="telefone{{i}}" placeholder="Telefone"
+        [(ngModel)]="pessoa.contatos[i].telefone">
+      <button type="button" class="btn btn-danger mt-2" (click)="removerContato(i)">Remover Contato</button>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="adicionarContato()">Adicionar Contato</button>
+    <hr>
+    <button *ngIf="!pessoa.id" type="submit" class="btn btn-success">Cadastrar Pessoa</button>
+    <button *ngIf="pessoa.id" type="submit" class="btn btn-success">Alterar Pessoa</button>
+  </form>
+</div>
